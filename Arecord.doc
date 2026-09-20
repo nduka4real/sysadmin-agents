@@ -1,0 +1,28 @@
+
+$TTL 86400
+@IN SOA dns-primary.git-gotech.net. admin.git-gotech.net. (
+                                                2020011800 ;Serial
+                                                3600 ;Refresh
+                                                1800 ;Retry
+                                                604800 ;Expire
+                                                86400 ;Minimum TTL
+)
+
+;Name Server Information
+@IN NS dns-primary.git-gotech.net.
+
+;IP Address for Name Server
+dns-primary IN A 10.1.10.53
+
+;Mail Server MX (Mail exchanger) Record
+mydomain.com. IN MX 10 mail.git-gotech.net.
+
+
+;A Record for the following Host name
+www IN A 10.1.10.53
+mail IN A 10.1.10.53
+
+;CNAME Record
+ftp IN CNAME www.git-gotech.net.
+
+
