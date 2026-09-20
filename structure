@@ -1,0 +1,24 @@
+                 YOUR WINDOWS PC
+                       │
+              ┌────────┴────────┐
+              │                 │
+           Ollama              Python
+              │                 │
+           Qwen3          AI SysAdmin
+                                │
+                                │ SSH
+                                ▼
+                         ┌─────────────┐
+                         │  Ubuntu01   │
+                         └──────┬──────┘
+                                │
+              ┌─────────────────┼─────────────────┐
+              ▼                 ▼                 ▼
+           systemctl          df -h             free
+              │                 │                 │
+              └─────────────────┼─────────────────┘
+                                ▼
+                           AI Analysis
+                                │
+                                ▼
+                         Admin Report
