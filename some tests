@@ -1,0 +1,29 @@
+First i downloaded OLLAMA for windows and ran some powershell commands
+ollama --version
+ollama pull qwen3:4b
+ollama run qwen3:4b
+You are an AI system administrator. Explain what systemctl does on Linux.
+
+
+i got the following response   
+
+
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+PS C:\WINDOWS\system32> ollama run qwen3:4b
+>>> what does system admin do in linux?
+Thinking...
+Okay, the user is asking what a system administrator does in Linux. Let
+me start by breaking down the key areas. First, I should cover the main
+responsibilities. System admins handle installation, configuration,
+maintenance, security, backups, user management, networking,
+monitoring, and troubleshooting. But I need to make it clear and
+practical.
+
+Wait, the user might be new to Linux or sysadmin roles. They might not
+know the jargon. So I should explain terms like "user management" or
+"networking" in simple terms. Maybe they're a student learning Linux,
+or someone considering a career in sysadmin. Or perhaps they're a
+developer who needs to understand their environment better.
+
