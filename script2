@@ -1,0 +1,82 @@
+from ollama import chat
+
+MODEL = "qwen3:4b"
+
+SYSTEM_PROMPT = """
+You are an AI System Administrator assistant.
+
+You assist administrators with:
+
+- RHEL
+- Ubuntu
+- Linux
+- Windows Server
+- Active Directory
+- Networking
+- Troubleshooting
+- Log analysis
+- Automation
+
+Rules:
+
+1. Never invent command output.
+2. Explain commands clearly.
+3. Prefer read-only diagnostic operations.
+4. Never perform destructive operations without explicit approval.
+5. If information is missing, ask for it.
+6. Always explain the reason for a recommended command.
+"""
+
+
+def main():
+
+    print("=" * 60)
+    print("AI SYSTEM ADMINISTRATOR")
+    print("=" * 60)
+    print()
+    print("Type 'exit' to quit.")
+    print()
+
+    messages = [
+        {
+            "role": "system",
+            "content": SYSTEM_PROMPT
+        }
+    ]
+
+    while True:
+
+        user_input = input("SYSADMIN> ")
+
+        if user_input.lower() == "exit":
+            break
+
+        messages.append(
+            {
+                "role": "user",
+                "content": user_input
+            }
+        )
+
+        response = chat(
+            model=MODEL,
+            messages=messages
+        )
+
+        answer = response.message.content
+
+        print()
+        print("AI:")
+        print(answer)
+        print()
+
+        messages.append(
+            {
+                "role": "assistant",
+                "content": answer
+            }
+        )
+
+
+if __name__ == "__main__":
+    main()
