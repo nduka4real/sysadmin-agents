@@ -1,0 +1,153 @@
+DAY 1 — AI SYSTEM ADMINISTRATOR LAB
+RHEL • Ubuntu • Windows Server • Active Directory
+Today we are going to install the tools, create the lab, connect an AI model to Python, connect Python to Ubuntu through SSH, and build your first AI SysAdmin assistant.
+The goal is not to cover everything today. The goal is to finish Day 1 with a working foundation.
+________________________________________
+DAY 1 OBJECTIVES
+By the end of today, you will have:
+Windows PC
+    │
+    ├── Ollama
+    │     └── Qwen3
+    │
+    ├── Python
+    │     └── AI SysAdmin Agent
+    │
+    ├── VS Code
+    │
+    └── VirtualBox
+           │
+           └── Ubuntu Server
+                  │
+                  └── SSH
+And your first agent will be able to ask Ubuntu for:
+•	Hostname
+•	Uptime
+•	CPU information
+•	RAM usage
+•	Disk usage
+•	IP information
+•	Failed services
+________________________________________
+PART 1 — CHECK YOUR WINDOWS COMPUTER
+Open PowerShell as Administrator.
+Run:
+Get-ComputerInfo | Select-Object WindowsProductName, WindowsVersion, OsArchitecture
+Check RAM:
+Get-CimInstance Win32_ComputerSystem |Select-Object TotalPhysicalMemory
+ Check CPU:
+Get-CimInstance Win32_Processor |Select-Object Name, NumberOfCores, NumberOfLogicalProcessors
+Recommended
+RAM:       16 GB minimum
+CPU:       4 cores minimum
+Storage:   100+ GB free
+Virtualization: Enabled
+If you have 32 GB RAM, even better because we will eventually run several VMs.
+________________________________________
+PART 2 — INSTALL OLLAMA
+Download the Windows version from:
+Ollama Windows download
+Install it normally.
+Open a new PowerShell:
+ollama --version
+You should see an Ollama version.
+Test it:
+ollama
+If Ollama starts, press Ctrl+C.
+________________________________________
+PART 3 — DOWNLOAD YOUR FIRST AI MODEL
+For Day 1, use Qwen3 4B:
+ollama pull qwen3:4b
+Check that it exists:
+ollama list
+You should see something similar to:
+NAME
+qwen3:4b
+Start it:
+ollama run qwen3:4b
+Test:
+Explain what systemctl does in Linux.
+Then:
+/bye
+If your computer has limited RAM
+Use:
+ollama pull qwen3:1.7b
+and later change the Python configuration from:
+qwen3:4b
+to:
+qwen3:1.7b
+PART 4 — TEST THE AI API
+Ollama provides a local API that our Python program will use.
+Open another PowerShell window.
+Run:
+Invoke-RestMethod `
+  -Uri "http://localhost:11434/api/chat" `
+  -Method POST `
+  -ContentType "application/json" `
+  -Body '{"model":"qwen3:4b","messages":[{"role":"user","content":"Explain SSH to a beginner system administrator."}],"stream":false}'
+If you get an AI response, this part is working.
+Your architecture is now:
+Python/Applications
+       │
+       ▼
+localhost:11434
+       │
+       ▼
+    Ollama
+       │
+       ▼
+    Qwen3
+________________________________________
+PART 5 — INSTALL PYTHON
+Download Python:
+Python for Windows
+During installation, very important:
+☑ Add python.exe to PATH
+Then open a new PowerShell:
+python --version
+Also:
+pip --version
+Both should work.
+________________________________________
+PART 6 — INSTALL VS CODE
+Download:
+Visual Studio Code
+Install it.
+Then:
+code --version
+If that works, VS Code is ready.
+Inside VS Code, install these extensions:
+Python
+Python Debugger
+Pylance
+YAML
+PowerShell
+________________________________________
+PART 7 — INSTALL GIT
+Download:
+Git for Windows
+Check:
+git --version
+Later we will put your AI SysAdmin project into GitHub.
+________________________________________
+PART 8 — INSTALL VIRTUALBOX
+Download:
+VirtualBox Downloads
+Install VirtualBox.
+Open it.
+We will initially create only one VM.
+Later:
+                    AI LAB
+                       │
+        ┌──────────────┼───────────────┐
+        │              │               │
+     Ubuntu          RHEL        Windows Server
+        │                              │
+        │                              ▼
+        │                         Active Directory
+        │
+        └──────────────┐
+                       │
+                  AI Agent
+
+________________________________________
