@@ -1,0 +1,45 @@
+┌──────────────────────────────┐
+│      Windows Workstation     │
+│       C:\AI-SysAdmin         │
+│                              │
+│  AI Agent                    │
+│      │                       │
+│      ▼                       │
+│  Linux Tools                 │
+│      │                       │
+│      ▼                       │
+│  Paramiko / SSH              │
+└──────────────┬───────────────┘
+               │
+               │ SSH
+               ▼
+┌──────────────────────────────┐
+│       Ubuntu Server          │
+│       192.168.*.*****        │
+│                              │
+│  hostname                    │
+│  uptime                      │
+│  memory                      │
+│  disk                        │
+│  CPU                         │
+│  network                     │
+│  ports                       │@'
+import os
+from dotenv import load_dotenv
+
+# Get the project root:
+# C:\AI-SysAdmin
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Load the .env file from the project root
+ENV_FILE = os.path.join(PROJECT_ROOT, ".env")
+load_dotenv(ENV_FILE)
+
+# Linux server connection settings
+LINUX_HOST = os.getenv("LINUX_HOST")
+LINUX_USER = os.getenv("LINUX_USER")
+LINUX_PASSWORD = os.getenv("LINUX_PASSWORD")
+'@ | Set-Content -Path .\config\settings.py -Encoding UTF8
+│  services                    │
+│  system errors               │
+└──────────────────────────────┘
