@@ -1,0 +1,147 @@
+@'
+import sys
+import os
+import traceback
+
+# Make project root available
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+from config import settings
+
+from tools.linux import (
+    get_hostname,
+    get_uptime,
+    get_memory,
+    get_disk,
+    get_cpu,
+    get_network,
+    get_listening_ports,
+    get_failed_services,
+    get_system_errors,
+)
+
+print("=" * 70)
+print("        AI SYSADMIN - DAY 2 LINUX TOOL TEST")
+print("=" * 70)
+
+print()
+print(f"Project root: {PROJECT_ROOT}")
+print(f"Python: {sys.executable}")
+
+print()
+print("=" * 70)
+print("CONFIGURATION CHECK")
+print("=" * 70)
+
+host = settings.LINUX_HOST
+username = settings.LINUX_USER
+password = settings.LINUX_PASSWORD
+
+if not host:
+    print("FAIL: LINUX_HOST is not configured in .env")
+    sys.exit(1)
+
+if not username:
+    print("FAIL: LINUX_USER is not configured in .env")
+    sys.exit(1)
+
+if not password:
+    print("FAIL: LINUX_PASSWORD is not configured in .env")
+    sys.exit(1)
+
+print("PASS")
+print(f"Linux host : {host}")
+print(f"Linux user : {username}")
+print("Password   : ********")
+
+print()
+print("=" * 70)
+print("IMPORT CHECK")
+print("=" * 70)
+print("PASS")
+print("Successfully imported tools.linux")
+
+results = []
+
+
+def run_test(number, name, function):
+    print()
+    print("=" * 70)
+    print(f"TEST: {number}. {name}")
+    print("=" * 70)
+
+    try:
+        result = function(host, username, password)
+
+        print("PASS")
+        print("Result:")
+        print(result)
+
+        results.append((f"{number}. {name}", "PASS", None))
+
+    except Exception as error:
+        print("FAIL")
+        print(f"Error: {type(error).__name__}: {error}")
+
+        print()
+        print("Traceback:")
+        traceback.print_exc()
+
+        results.append(
+            (
+                f"{number}. {name}",
+                "FAIL",
+                f"{type(error).__name__}: {error}",
+            )
+        )
+
+
+run_test(1, "Hostname", get_hostname)
+run_test(2, "Uptime", get_uptime)
+run_test(3, "Memory", get_memory)
+run_test(4, "Disk", get_disk)
+run_test(5, "CPU", get_cpu)
+run_test(6, "Network", get_network)
+run_test(7, "Listening Ports", get_listening_ports)
+run_test(8, "Failed Services", get_failed_services)
+run_test(9, "System Errors", get_system_errors)
+
+
+print()
+print()
+print("=" * 70)
+print("                    TEST SUMMARY")
+print("=" * 70)
+
+passed = 0
+failed = 0
+
+for name, status, error in results:
+    if status == "PASS":
+        passed += 1
+        print(f"[PASS] {name}")
+    else:
+        failed += 1
+        print(f"[FAIL] {name}")
+        print(f"       {error}")
+
+print()
+print("-" * 70)
+print(f"Total tests : {len(results)}")
+print(f"Passed      : {passed}")
+print(f"Failed      : {failed}")
+print("-" * 70)
+
+if failed == 0:
+    print()
+    print("SUCCESS: All Linux tools passed.")
+    print("The AI SysAdmin Day 2 tool layer is working.")
+else:
+    print()
+    print("WARNING: One or more Linux tools failed.")
+    print("Review the FAIL messages above.")
+
+print()
+'@ | Set-Content -Path tests\test_tools.py -Encoding UTF8
