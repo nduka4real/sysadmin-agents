@@ -1,0 +1,28 @@
+                    AI SYSADMIN
+                         │
+          ┌──────────────┴──────────────┐
+          │                             │
+    INVESTIGATION                  OPERATIONS
+          │                             │
+     Linux/RHEL                    Users/Groups
+     Ubuntu                        Storage/Swap
+     Windows                       Files
+     macOS                         Services
+     Clusters                      Packages/Repos
+     Applications                  Rsyslog/Rsync
+          │                         Updates
+          │                         Migration
+          │                         Ansible
+          │                             │
+          └───────────┬─────────────────┘
+                      ▼
+                APPROVAL ENGINE
+                      │
+                      ▼
+                EXECUTION ENGINE
+                      │
+                      ▼
+                  VERIFICATION
+                      │
+                      ▼
+                    AUDIT
